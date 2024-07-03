@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Kerigma Music</title>
+    <link href="~/plugins/SweetAlert2/css/min.css" rel="stylesheet" />
+    <link href="~/plugins/DataTables/css/min.css" rel="stylesheet" />
+    <link href="~/plugins/DataTables/css/dataTable.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KM.SysControlAdmin.WebApp.styles.css" asp-append-version="true" />
 </head>
@@ -15,8 +18,13 @@
         </main>
     </div>
 
+    <script src="~/plugins/SweetAlert2/js/min.js"></script>
+    <script src="~/plugins/DataTables/js/min.js"></script>
+    <script src="~/plugins/DataTables/js/dataTable.js"></script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
