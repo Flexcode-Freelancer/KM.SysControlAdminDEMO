@@ -4,11 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Kerigma Music</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/KM.SysControlAdmin.WebApp.styles.css" asp-append-version="true" />
+
     <link href="~/plugins/SweetAlert2/css/min.css" rel="stylesheet" />
     <link href="~/plugins/DataTables/css/min.css" rel="stylesheet" />
     <link href="~/plugins/DataTables/css/dataTable.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/KM.SysControlAdmin.WebApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/styles.min.css" />
+    <link href="~/assets/css/custom.css" rel="stylesheet" />
 </head>
 <body>
     
@@ -22,8 +25,12 @@
     <script src="~/plugins/DataTables/js/min.js"></script>
     <script src="~/plugins/DataTables/js/dataTable.js"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/sidebarmenu.js"></script>
+    <script src="~/assets/js/app.min.js"></script>
+    <script src="~/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="~/assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="~/assets/js/dashboard.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
