@@ -1,22 +1,36 @@
 ﻿@model IEnumerable<KM.SysControlAdmin.EN.Role___EN.Role>
 
 @{
-    ViewData["Title"] = "Rol";
+    ViewData["Title"] = "Roles";
 }
 
 <h1>Mantenimiento Para Roles</h1>
 <hr />
-<form asp-action="Index">
-    <div>
-        <label>Nombre</label>
-        <input type="text" name="Name" placeholder="Ingresar"/>
-    </div>
-    <div>
-        <input type="submit" value="Buscar" /> &nbsp;&nbsp;|
-        <a asp-action="Create">Crear Nuevo Rol</a>
-    </div>
-</form>
+<div class="container">
+    <form asp-action="Index">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Name">Nombre</label>
+                    <input type="text" class="form-control" name="Name" placeholder="Ingresar" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-outline-success m-1" value="Buscar Rol" /> &nbsp;&nbsp;|
+                    <a asp-action="Create" class="btn btn-primary">Crear Nuevo Rol</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<br />
+<br />
 <h2>Tabla de Resultados</h2>
+<br />
 <table id="ResultData" class="hover" style="width:100%">
     <thead>
         <tr>
@@ -34,9 +48,9 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "" }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "" })
+                    @Html.ActionLink("Modificar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning m-1" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info m-1" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger m-1" })
                 </td>
             </tr>
         }
