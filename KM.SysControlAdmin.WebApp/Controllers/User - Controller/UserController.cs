@@ -16,6 +16,7 @@ using System.Security.Claims;
 
 namespace KM.SysControlAdmin.WebApp.Controllers.User___Controller
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Desarrollador")]
     public class UserController : Controller
     {
         // Instancias Para Acceder a Los Metodos
