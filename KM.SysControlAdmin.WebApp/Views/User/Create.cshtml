@@ -62,6 +62,7 @@
                 <label asp-for="IdRole"></label>
                 <span>*</span>
                 <select asp-for="IdRole">
+                    <option selected value="0">Seleccionar</option>
                     @foreach (var item in roles!)
                     {
                         <option value="@item.Id">@item.Name</option>
