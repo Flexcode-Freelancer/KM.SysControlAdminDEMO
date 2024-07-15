@@ -39,3 +39,19 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+        function showErrorAlert(message) {
+            Swal.fire({
+                title: 'Ups!',
+                text: message,
+                icon: 'error'
+            });
+        }
+        // Mostrar alerta de ViewBag.Error si es necesario
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            @:showErrorAlert('@ViewBag.Error');
+        }
+    </script>
+}
