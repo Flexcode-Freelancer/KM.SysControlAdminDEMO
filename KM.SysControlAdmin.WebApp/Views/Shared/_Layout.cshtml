@@ -118,7 +118,7 @@
                                                 <i class="ti ti-user fs-6"></i>
                                                 <p class="mb-0 fs-3">Mi Información</p>
                                             </a>
-                                            <a asp-area="" asp-controller="User" asp-action="Logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar Sesiòn</a>
+                                            <a id="logoutLink" href="javascript:void(0)" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar Sesiòn</a>
                                         </div>
                                     </div>
                                 </li>
@@ -149,6 +149,24 @@
             </main>
         </div>
     }
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('logoutLink').addEventListener('click', function () {
+                Swal.fire({
+                    title: '¿Está seguro de que desea cerrar sesión?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, Cerrar sesión',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '@Url.Action("Logout", "User")';
+                    }
+                });
+            });
+        });
+    </script>
 
     <script src="~/plugins/SweetAlert2/js/min.js"></script>
     <script src="~/plugins/DataTables/js/min.js"></script>
