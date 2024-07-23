@@ -91,7 +91,7 @@ namespace KM.SysControlAdmin.EN.Trainer___EN
         #endregion
     }
 
-    public enum Membership_Status
+    public enum Trainer_Status
     {
         ACTIVO = 1, INACTIVO = 2
     }
