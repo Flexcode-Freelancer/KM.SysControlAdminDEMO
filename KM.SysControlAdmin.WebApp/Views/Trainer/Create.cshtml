@@ -12,32 +12,32 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" required/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control" required />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Dui" class="control-label"></label>
-                <input asp-for="Dui" class="form-control" />    
+                <input asp-for="Dui" class="form-control" id="inputDui" required />
                 <span asp-validation-for="Dui" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
+                <input asp-for="DateOfBirth" class="form-control" required />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
+                <input asp-for="Age" class="form-control" readonly required />
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Gender" class="control-label"></label>
-                <select name="Gender" class="form-select">
+                <select name="Gender" class="form-select" required>
                     <option value="" selected>Seleccionar</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CivilStatus" class="control-label"></label>
-                <select name="CivilStatus" class="form-select">
+                <select name="CivilStatus" class="form-select" required>
                     <option value="" selected>Seleccionar</option>
                     <option value="Soltero/a">Soltero/a</option>
                     <option value="Casado/a">Casado/a</option>
@@ -57,17 +57,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
+                <input asp-for="Phone" class="form-control" required />
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+                <input asp-for="Address" class="form-control" required />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <select name="Status" class="form-select">
+                <select name="Status" class="form-select" required>
                     <option value="">Seleccionar</option>
                     <option value="1">Activo</option>
                     <option value="2">Inactivo</option>
@@ -76,28 +76,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="CommentsOrObservations" class="control-label"></label>
-                <input asp-for="CommentsOrObservations" class="form-control" />
+                <input asp-for="CommentsOrObservations" class="form-control" required />
                 <span asp-validation-for="CommentsOrObservations" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateCreated" class="control-label"></label>
-                <input asp-for="DateCreated" class="form-control" type="date"/>
-                <span asp-validation-for="DateCreated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateModification" class="control-label"></label>
-                <input asp-for="DateModification" class="form-control" type="date"/>
-                <span asp-validation-for="DateModification" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label for="imagen">Seleccionar Fotografia:</label>
-                <input type="file" id="imagen" name="imagen" onchange="mostrarImagen()" asp-for="ImageData" />
+                <input type="file" id="imagen" class="form-control" name="imagen" onchange="mostrarImagen()" asp-for="ImageData" />
             </div>
             <div>
                 <img id="imagenPreview" src="#" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none;" />
             </div>
+            <br/>
             <div class="form-group">
-                <input type="submit" value="Crear Instructor/Docente" class="btn btn-primary" />
+                <input type="submit" value="Crear Instructor/Docente" class="btn btn-primary" /> 
                 <a asp-action="Index">Regresar a La Lista</a>
             </div>
         </form>
@@ -105,5 +96,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}    
 }
