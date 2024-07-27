@@ -5,10 +5,11 @@
 }
 
 <h1>Crear Nuevo Instructor/Docente</h1>
+<span>@ViewBag.Error</span>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form id="Form" asp-action="Create" onsubmit="CreateRecord(event)" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -83,8 +84,9 @@
                 <label for="imagen">Seleccionar Fotografia:</label>
                 <input type="file" id="imagen" class="form-control" name="imagen" onchange="mostrarImagen()" asp-for="ImageData" />
             </div>
+            <br />
             <div>
-                <img id="imagenPreview" src="#" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none;" />
+                <img id="imagenPreview" src="#" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none; border: 1px solid #d3d3d3;" />
             </div>
             <br/>
             <div class="form-group">
@@ -111,12 +113,7 @@
         {
             @:showErrorAlert('@ViewBag.Error');
         }
-
-
-
-
-
-
+        // Eventos automatizados
         document.addEventListener("DOMContentLoaded", function () {
             // Insercion de (-) al Dui, Ademas de Generar Codigo de Barras En Base Al Dui
             function formatDui(inputValue) {
@@ -179,5 +176,58 @@
             });
             calculateAge(); // Calcular la antigüedad cuando se carga la página
         });
+        // Método Para Mostrar Vista Previa De La Imagen Seleccionada
+        function mostrarImagen() {
+            var archivo = document.getElementById('imagen').files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var imagenPreview = document.getElementById('imagenPreview');
+                imagenPreview.src = e.target.result;
+                imagenPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(archivo);
+        }
+        // Alerta con SweetAlert2
+        function CreateRecord(e) {
+            e.preventDefault();
+            const form = document.getElementById('Form');
+            const inputs = document.querySelectorAll('.form-input');
+            const nameFields = ['Name', 'LastName'];
+            const regex = /^[A-ZÑa-zñáéíóúÁÉÍÓÚ. ]+$/;
+
+            let isValid = true;
+
+            // Validar que los campos nameFields solo contengan letras, punto y espacios
+            nameFields.forEach((field) => {
+                const input = document.querySelector(`#${field}`);
+                if (!regex.test(input.value)) {
+                    isValid = false;
+                }
+            });
+
+            // Si la validación falla, muestra una alerta advirtiendo al usuario
+            if (!isValid) {
+                Swal.fire({
+                    title: '!Advertencia!',
+                    text: 'Ciertos Campos Solo Deben Tener Letras, Revisa Tu Ficha',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+                return;
+            }
+
+            // Si todos los campos son válidos, muestra la alerta de confirmación
+            Swal.fire({
+                title: '¿Guardar Nuevo Registro?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, Guardar Registro'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
     </script>
 }
