@@ -57,11 +57,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" required />
+                <input asp-for="Phone" class="form-control" id="inputPhone" required />
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
+                <label asp-for="Address" class="control-label"></label> 
                 <input asp-for="Address" class="form-control" required />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
@@ -96,5 +96,88 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}    
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function showErrorAlert(message) {
+            Swal.fire({
+                title: 'Error',
+                text: message,
+                icon: 'error'
+            });
+        }
+        // Mostrar alerta de ViewBag.Error si es necesario
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            @:showErrorAlert('@ViewBag.Error');
+        }
+
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Insercion de (-) al Dui, Ademas de Generar Codigo de Barras En Base Al Dui
+            function formatDui(inputValue) {
+                inputValue = inputValue.replace(/\D/g, ''); // Remover todos los caracteres que no sean dígitos
+                var formattedValue = '';
+                for (var i = 0; i < inputValue.length; i++) {
+                    if (i == 8) {
+                        formattedValue += '-' + inputValue.charAt(i);
+                    } else {
+                        formattedValue += inputValue.charAt(i);
+                    }
+                }
+                formattedValue = formattedValue.substring(0, 10); // Limitar la longitud total a 10 caracteres, incluyendo el guion
+                return formattedValue;
+            }
+            // Calculo De La Edad En Base a La Fecha De Nacimiento
+            const birthDateInput = document.querySelector('input[name="DateOfBirth"]');
+            const ageInput = document.querySelector('input[name="Age"]');
+
+            function calculateAge() {
+                const birthDateValue = birthDateInput.value.trim();
+                if (birthDateValue !== "") {
+                    const birthDate = new Date(birthDateValue);
+                    const currentDate = new Date();
+                    let age = currentDate.getFullYear() - birthDate.getFullYear(); // Calcule la edad restando el año de nacimiento del año actual
+
+                    // Ajusta la edad si la fecha de nacimiento aún no ha ocurrido este año
+                    if (birthDate.getMonth() > currentDate.getMonth() ||
+                        (birthDate.getMonth() === currentDate.getMonth() && birthDate.getDate() > currentDate.getDate())) {
+                        age--;
+                    }
+                    ageInput.value = age; // Actualizar el campo de edad
+                } else {
+                    ageInput.value = ""; // Desactive el campo de edad si no se proporciona ninguna fecha de nacimiento
+                }
+            }
+
+            // Insercion de (-) despues de cada 4 numeros en los numeros de telefono
+            const inputPhone = document.getElementById('inputPhone');
+
+            function formatPhoneNumber(input) {
+                let phoneNumber = input.value.replace(/\D/g, ''); // Elimina cualquier carácter que no sea número
+                if (phoneNumber.length > 4) {
+                    phoneNumber = phoneNumber.slice(0, 4) + '-' + phoneNumber.slice(4, 8); // Formatea el número con un guion después de los primeros 4 dígitos
+                }
+                input.value = phoneNumber;
+            }
+
+            // Asignar eventos
+            document.getElementById('inputDui').addEventListener('input', function (event) {
+                var inputValue = event.target.value;
+                var formattedValue = formatDui(inputValue);
+                event.target.value = formattedValue;
+                actualizarCodigoDeBarras();
+            });
+
+            birthDateInput.addEventListener('change', calculateAge); // Agregar detector de eventos para el cambio en la fecha de nacimiento
+            inputPhone.addEventListener('input', function (e) {
+                formatPhoneNumber(e.target);
+            });
+            calculateAge(); // Calcular la antigüedad cuando se carga la página
+        });
+    </script>
 }
