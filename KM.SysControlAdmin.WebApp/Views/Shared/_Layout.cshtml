@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,8 +9,6 @@
 
     <link rel="icon" href="~/assets/img/logos/Icon Kerigma Music.png" type="image/x-icon">
     <link href="~/plugins/SweetAlert2/css/min.css" rel="stylesheet" />
-    <link href="/plugins/DataTables/css/min.css" rel="stylesheet" />
-    <link href="/plugins/DataTables/css/dataTable.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/assets/css/styles.min.css" />
     <link href="~/assets/css/custom.css" rel="stylesheet" />
 </head>
@@ -181,16 +179,14 @@
         });
     </script>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/plugins/SweetAlert2/js/min.js"></script>
-    <script src="~/plugins/DataTables/js/min.js"></script>
-    <script src="~/plugins/DataTables/js/dataTable.js"></script>
 
     <script src="~/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/js/sidebarmenu.js"></script>
     <script src="~/assets/js/app.min.js"></script>
     <script src="~/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="~/assets/libs/simplebar/dist/simplebar.js"></script>
-    <script src="~/assets/js/dashboard.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
