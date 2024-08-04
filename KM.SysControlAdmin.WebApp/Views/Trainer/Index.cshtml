@@ -95,6 +95,21 @@
 
 @section Scripts{
     <script>
+        // Configuracion para la tabla principal
+        new DataTable('#ResultData', {
+            info: false,
+            order: false,
+            Response: true,
+            pagingType: 'simple_numbers',
+            language: {
+                search: 'Busqueda Rapida :',
+                searchPlaceholder: 'Ingresar',
+                lengthMenu: '_MENU_ Mostrar',
+                emptyTable: 'No Hay Datos Que Coincidan Con Su Criterio De Búsqueda.',
+                zeroRecords: 'No Existen Registros Segun La Busqueda',
+                processing: 'Procesando...',
+            }
+        });
         // Función para formatear el Dui
         function formatDui(inputValue) {
             inputValue = inputValue.replace(/\D/g, ''); // Remover todos los caracteres que no sean dígitos

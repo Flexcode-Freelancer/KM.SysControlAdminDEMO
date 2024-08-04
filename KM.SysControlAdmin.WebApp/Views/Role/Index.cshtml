@@ -59,6 +59,20 @@
 
 @section Scripts{
     <script>
+        new DataTable('#ResultData', {
+            info: false,
+            order: false,
+            Response: true,
+            pagingType: 'simple_numbers',
+            language: {
+                search: 'Busqueda Rapida :',
+                searchPlaceholder: 'Ingresar',
+                lengthMenu: '_MENU_ Mostrar',
+                emptyTable: 'No Hay Datos Que Coincidan Con Su Criterio De Búsqueda.',
+                zeroRecords: 'No Existen Registros Segun La Busqueda',
+                processing: 'Procesando...',
+            }
+        });
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
