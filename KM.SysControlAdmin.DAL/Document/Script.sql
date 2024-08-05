@@ -40,7 +40,7 @@ GO
     INSERT INTO [User] (IdRole, [Name], LastName, Email, [Password], [Status], RegistrationDate) 
     VALUES (1, 'Flexcode', 'Freelancer', 'DesAdmin@kerigmamusic.com', 'c8aa131427a72781b156ac723ddb917f', 1, SYSDATETIME());
 GO
-  CREATE TABLE Schedules(
+  CREATE TABLE Schedule(
   Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   StartTime TIME NOT NULL,
   EndTime TIME NOT NULL
