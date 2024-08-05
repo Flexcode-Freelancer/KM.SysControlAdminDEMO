@@ -14,5 +14,11 @@ namespace KM.SysControlAdmin.WebApp.Controllers
         {
             return View();
         }
+
+        [Authorize(Roles = "Desarrollador")]
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
     }
 }
