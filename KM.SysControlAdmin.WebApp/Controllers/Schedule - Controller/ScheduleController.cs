@@ -1,9 +1,6 @@
 ﻿#region REFERENCIAS
 // Referencias Necesarias Para El Correcto Funcionamiento
-using KM.SysControlAdmin.BL.Role___BL;
 using KM.SysControlAdmin.BL.Schedule___BL;
-using KM.SysControlAdmin.DAL.Role___DAL;
-using KM.SysControlAdmin.EN.Role___EN;
 using KM.SysControlAdmin.EN.Schedules___EN;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
