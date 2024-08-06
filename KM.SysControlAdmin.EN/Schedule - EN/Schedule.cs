@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 // Referencias Necesarias Para El Correcto Funcionamiento
 using System.ComponentModel.DataAnnotations;
+using KM.SysControlAdmin.EN.Course__EN;
 
 
 #endregion
@@ -28,5 +29,7 @@ namespace KM.SysControlAdmin.EN.Schedules___EN
         [DataType(DataType.Time)]
         public TimeSpan EndTime { get; set; }
         #endregion
+
+        public List<Course> Course { get; set;} = new List<Course>(); // Propiedad de navegacion
     }
 }
