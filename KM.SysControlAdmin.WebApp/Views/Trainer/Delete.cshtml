@@ -117,9 +117,9 @@
     </form>
 </div>
 
-@section Scripts{
+@section Scripts {
     <script>
-        // Funcion para estructura de alerta para Error
+        // Función para mostrar una alerta de error
         function showErrorAlert(message) {
             Swal.fire({
                 title: 'Error',
@@ -127,22 +127,24 @@
                 icon: 'error'
             });
         }
+
         // Mostrar alerta de ViewBag.Error si es necesario
         @if (!string.IsNullOrEmpty(ViewBag.Error))
         {
             @:showErrorAlert('@ViewBag.Error');
         }
-        // Funcion para la alerta
+
+        // Función para mostrar una alerta de confirmación antes de eliminar un registro
         function CreateRecord(e) {
             e.preventDefault();
             const form = document.getElementById('Form');
 
             Swal.fire({
                 title: '¿Eliminar Este Registro?',
-                text: '¿Estas Seguro De Eliminar el Siguiente Registro? Recuerda No Puedes Revertir Los Cambios',
+                text: '¿Estás seguro de eliminar el siguiente registro? Recuerda que no puedes revertir los cambios.',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Si, Eliminar Registro'
+                confirmButtonText: 'Sí, Eliminar Registro',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {

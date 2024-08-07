@@ -98,9 +98,12 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
     <script>
+        // Mostrar alerta de error
         function showErrorAlert(message) {
             Swal.fire({
                 title: 'Error',
@@ -108,75 +111,80 @@
                 icon: 'error'
             });
         }
-        // Mostrar alerta de ViewBag.Error si es necesario
+
+        // Mostrar alerta de error de ViewBag.Error si es necesario
         @if (!string.IsNullOrEmpty(ViewBag.Error))
         {
             @:showErrorAlert('@ViewBag.Error');
         }
-        // Eventos automatizados
-        document.addEventListener("DOMContentLoaded", function () {
-            // Insercion de (-) al Dui, Ademas de Generar Codigo de Barras En Base Al Dui
-            function formatDui(inputValue) {
-                inputValue = inputValue.replace(/\D/g, ''); // Remover todos los caracteres que no sean dígitos
-                var formattedValue = '';
-                for (var i = 0; i < inputValue.length; i++) {
-                    if (i == 8) {
-                        formattedValue += '-' + inputValue.charAt(i);
+
+            // Eventos automatizados al cargar el documento
+            document.addEventListener("DOMContentLoaded", function () {
+                // Función para formatear el DUI
+                function formatDui(inputValue) {
+                    inputValue = inputValue.replace(/\D/g, ''); // Remover todos los caracteres que no sean dígitos
+                    var formattedValue = '';
+                    for (var i = 0; i < inputValue.length; i++) {
+                        if (i == 8) {
+                            formattedValue += '-' + inputValue.charAt(i);
+                        } else {
+                            formattedValue += inputValue.charAt(i);
+                        }
+                    }
+                    formattedValue = formattedValue.substring(0, 10); // Limitar la longitud total a 10 caracteres, incluyendo el guion
+                    return formattedValue;
+                }
+
+                // Calcular la edad en base a la fecha de nacimiento
+                const birthDateInput = document.querySelector('input[name="DateOfBirth"]');
+                const ageInput = document.querySelector('input[name="Age"]');
+
+                function calculateAge() {
+                    const birthDateValue = birthDateInput.value.trim();
+                    if (birthDateValue !== "") {
+                        const birthDate = new Date(birthDateValue);
+                        const currentDate = new Date();
+                        let age = currentDate.getFullYear() - birthDate.getFullYear(); // Calcular la edad restando el año de nacimiento del año actual
+
+                        // Ajustar la edad si la fecha de nacimiento aún no ha ocurrido este año
+                        if (birthDate.getMonth() > currentDate.getMonth() ||
+                            (birthDate.getMonth() === currentDate.getMonth() && birthDate.getDate() > currentDate.getDate())) {
+                            age--;
+                        }
+                        ageInput.value = age; // Actualizar el campo de edad
                     } else {
-                        formattedValue += inputValue.charAt(i);
+                        ageInput.value = ""; // Desactivar el campo de edad si no se proporciona ninguna fecha de nacimiento
                     }
                 }
-                formattedValue = formattedValue.substring(0, 10); // Limitar la longitud total a 10 caracteres, incluyendo el guion
-                return formattedValue;
-            }
-            // Calculo De La Edad En Base a La Fecha De Nacimiento
-            const birthDateInput = document.querySelector('input[name="DateOfBirth"]');
-            const ageInput = document.querySelector('input[name="Age"]');
 
-            function calculateAge() {
-                const birthDateValue = birthDateInput.value.trim();
-                if (birthDateValue !== "") {
-                    const birthDate = new Date(birthDateValue);
-                    const currentDate = new Date();
-                    let age = currentDate.getFullYear() - birthDate.getFullYear(); // Calcule la edad restando el año de nacimiento del año actual
+                // Función para formatear el número de teléfono
+                const inputPhone = document.getElementById('inputPhone');
 
-                    // Ajusta la edad si la fecha de nacimiento aún no ha ocurrido este año
-                    if (birthDate.getMonth() > currentDate.getMonth() ||
-                        (birthDate.getMonth() === currentDate.getMonth() && birthDate.getDate() > currentDate.getDate())) {
-                        age--;
+                function formatPhoneNumber(input) {
+                    let phoneNumber = input.value.replace(/\D/g, ''); // Eliminar cualquier carácter que no sea número
+                    if (phoneNumber.length > 4) {
+                        phoneNumber = phoneNumber.slice(0, 4) + '-' + phoneNumber.slice(4, 8); // Formatear el número con un guion después de los primeros 4 dígitos
                     }
-                    ageInput.value = age; // Actualizar el campo de edad
-                } else {
-                    ageInput.value = ""; // Desactive el campo de edad si no se proporciona ninguna fecha de nacimiento
+                    input.value = phoneNumber;
                 }
-            }
 
-            // Insercion de (-) despues de cada 4 numeros en los numeros de telefono
-            const inputPhone = document.getElementById('inputPhone');
+                // Asignar eventos
+                document.getElementById('inputDui').addEventListener('input', function (event) {
+                    var inputValue = event.target.value;
+                    var formattedValue = formatDui(inputValue);
+                    event.target.value = formattedValue;
+                    actualizarCodigoDeBarras(); // Asumiendo que existe una función para actualizar el código de barras
+                });
 
-            function formatPhoneNumber(input) {
-                let phoneNumber = input.value.replace(/\D/g, ''); // Elimina cualquier carácter que no sea número
-                if (phoneNumber.length > 4) {
-                    phoneNumber = phoneNumber.slice(0, 4) + '-' + phoneNumber.slice(4, 8); // Formatea el número con un guion después de los primeros 4 dígitos
-                }
-                input.value = phoneNumber;
-            }
+                birthDateInput.addEventListener('change', calculateAge); // Agregar detector de eventos para el cambio en la fecha de nacimiento
+                inputPhone.addEventListener('input', function (e) {
+                    formatPhoneNumber(e.target);
+                });
 
-            // Asignar eventos
-            document.getElementById('inputDui').addEventListener('input', function (event) {
-                var inputValue = event.target.value;
-                var formattedValue = formatDui(inputValue);
-                event.target.value = formattedValue;
-                actualizarCodigoDeBarras();
+                calculateAge(); // Calcular la edad cuando se carga la página
             });
 
-            birthDateInput.addEventListener('change', calculateAge); // Agregar detector de eventos para el cambio en la fecha de nacimiento
-            inputPhone.addEventListener('input', function (e) {
-                formatPhoneNumber(e.target);
-            });
-            calculateAge(); // Calcular la antigüedad cuando se carga la página
-        });
-        // Método Para Mostrar Vista Previa De La Imagen Seleccionada
+        // Método para mostrar vista previa de la imagen seleccionada
         function mostrarImagen() {
             var archivo = document.getElementById('imagen').files[0];
             var reader = new FileReader();
@@ -188,7 +196,8 @@
             };
             reader.readAsDataURL(archivo);
         }
-        // Alerta con SweetAlert2
+
+        // Alerta con SweetAlert2 para crear un registro
         function CreateRecord(e) {
             e.preventDefault();
             const form = document.getElementById('Form');
@@ -222,7 +231,7 @@
                 title: '¿Guardar Nuevo Registro?',
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonText: 'Sí, Guardar Registro'
+                confirmButtonText: 'Sí, Guardar Registro',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {

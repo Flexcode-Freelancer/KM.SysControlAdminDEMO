@@ -117,18 +117,18 @@
             $("#cbxCivilStatus").val('@Model.CivilStatus');
             $("#cbxStatus").val('@Model.Status');
 
-            // Mostrar alerta de ViewBag.Error si es necesario
-            @if (!string.IsNullOrEmpty(ViewBag.Error))
-            {
-                @:showErrorAlert('@ViewBag.Error');
-            }
+            // Mostrar alerta de error si ViewBag.Error tiene algún mensaje
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            @:showErrorAlert('@ViewBag.Error');
+        }
 
-            // Asignar eventos a los elementos del formulario
-            document.getElementById('inputDui').addEventListener('input', function (event) {
-                var inputValue = event.target.value;
-                var formattedValue = formatDui(inputValue);
-                event.target.value = formattedValue;
-            });
+                // Asignar eventos a los elementos del formulario
+                document.getElementById('inputDui').addEventListener('input', function (event) {
+                    var inputValue = event.target.value;
+                    var formattedValue = formatDui(inputValue);
+                    event.target.value = formattedValue;
+                });
 
             const birthDateInput = document.querySelector('input[name="DateOfBirth"]');
             birthDateInput.addEventListener('change', calculateAge);
@@ -241,7 +241,7 @@
                 title: '¿Modificar Registro Existente?',
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonText: 'Sí, Modificar Registro'
+                confirmButtonText: 'Sí, Modificar Registro',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
