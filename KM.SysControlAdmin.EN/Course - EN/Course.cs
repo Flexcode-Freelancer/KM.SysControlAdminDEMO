@@ -22,14 +22,14 @@ namespace KM.SysControlAdmin.EN.Course__EN
         public int Id { get; set; }
 
         [Required(ErrorMessage = "El Codigo es requerido")]
-        [MaxLength(10, ErrorMessage = "Máximo 10 caracteres")]
+        [MaxLength(15, ErrorMessage = "Máximo 15 caracteres")]
         [Display(Name = "Codigo del Curso")]
         public string Code { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El nombre es requerido")]
         [MaxLength(100, ErrorMessage = "Máximo 100 caracteres")]
         [Display(Name = "Nombre")]
-        [RegularExpression("^[a-zA-ZáéíóúÁÉÍÓÚñÑ/ ]+$", ErrorMessage = "El Nombre debe contener solo Letras")]
+        [RegularExpression("^[a-zA-ZáéíóúÁÉÍÓÚñÑ/0123456789 ]+$", ErrorMessage = "El Nombre debe contener solo Letras")]
         public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El precio es requerido")]
