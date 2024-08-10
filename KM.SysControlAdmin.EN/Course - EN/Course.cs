@@ -39,12 +39,12 @@ namespace KM.SysControlAdmin.EN.Course__EN
 
         [Required(ErrorMessage = "La hora de inicio es requerida")]
         [DataType(DataType.DateTime, ErrorMessage = "Por favor, introduce una fecha válida")]
-        [Display(Name = "Hora de Inicio")]
+        [Display(Name = "Fecha de Inicio")]
         public DateTime StartTime { get; set; }
 
         [Required(ErrorMessage = "La hora de fin es requerida")]
         [DataType(DataType.DateTime, ErrorMessage = "Por favor, introduce una fecha válida")]
-        [Display(Name = "Hora de Fin")]
+        [Display(Name = "Fecha de Finalización")]
         public DateTime EndTime { get; set; }
 
         [MaxLength(2, ErrorMessage = "Máximo 2 caracteres")]
@@ -72,6 +72,11 @@ namespace KM.SysControlAdmin.EN.Course__EN
         [Display(Name = "Fecha de Modificacion")]
         public DateTime DateModification { get; set; }
         #endregion
+
+        [NotMapped]
+        public string FormattedStartTime => StartTime.ToString("dd/MM/yyyy");
+        [NotMapped]
+        public string FormattedEndTime => EndTime.ToString("dd/MM/yyyy");
 
         public Schedule? Schedule { get; set; } // Propiedad de navegacion
         public Trainer? Trainer { get; set; } // Propiedad de navegacion
