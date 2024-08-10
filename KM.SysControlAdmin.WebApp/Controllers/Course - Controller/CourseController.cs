@@ -171,9 +171,16 @@ namespace KM.SysControlAdmin.WebApp.Controllers.Course___Controller
                 {
                     return NotFound();
                 }
-                ViewBag.Trainers = await trainerBL.GetAllAsync();
-                ViewBag.Schedule = await scheduleBL.GetAllAsync();
-                return View();
+                // Obtén las entidades relacionadas Trainer y Schedule
+                course.Trainer = await trainerBL.GetByIdAsync(new Trainer { Id = course.IdTrainer });
+                course.Schedule = await scheduleBL.GetByIdAsync(new Schedule { Id = course.IdSchedule });
+
+                // Comprueba si las entidades relacionadas existen
+                if (course.Trainer == null || course.Schedule == null)
+                {
+                    return NotFound();
+                }
+                return View(course); // Retorna los detalles a la vista
             }
             catch (Exception ex)
             {
