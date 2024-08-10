@@ -11,6 +11,7 @@ using KM.SysControlAdmin.EN.User___EN;
 using KM.SysControlAdmin.EN.Trainer___EN;
 using KM.SysControlAdmin.EN.Schedules___EN;
 using KM.SysControlAdmin.EN.Course__EN;
+using KM.SysControlAdmin.EN.Student___EN;
 
 
 #endregion
@@ -26,6 +27,7 @@ namespace KM.SysControlAdmin.DAL
         public DbSet<Trainer> Trainer { get; set; }
         public DbSet<Schedule> Schedule { get; set; }
         public DbSet<Course> Course { get; set; }
+        public DbSet<Student> Student { get; set; }
         #endregion
 
         // Metodo de Conexion a la Base de Datos
