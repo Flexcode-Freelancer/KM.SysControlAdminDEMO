@@ -10,7 +10,7 @@
 <!-- Checkbox para "No soy del Proyecto" -->
 <div class="form-group form-check">
     <input type="checkbox" id="notFromProject" class="form-check-input" />
-    <h5 for="notFromProject" class="form-check-label">No soy del Proyecto</h5>
+    <h5 for="notFromProject" class="form-check-label">Soy Parte Del Proyecto</h5>
 </div>
 <hr />
 <div class="row">
@@ -168,7 +168,7 @@
             e.preventDefault();
             const form = document.getElementById('Form');
             const inputs = document.querySelectorAll('.form-input');
-            const nameFields = ['Name', 'LastName', 'Church'];
+            const nameFields = ['Name', 'LastName'];
             const regex = /^[A-ZÑa-zñáéíóúÁÉÍÓÚ. ]+$/;
 
             let isValid = true;
