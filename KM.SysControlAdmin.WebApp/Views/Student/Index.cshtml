@@ -73,12 +73,26 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodeProyect)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParticipantCode)
-            </td>
+            @if(item.CodeProyect == "" && item.ParticipantCode == "")
+            {
+                <td>NO APLICA</td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodeProyect)
+                </td>
+            }
+            @if (item.ParticipantCode == "")
+            {
+                <td>NO APLICA</td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParticipantCode)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
