@@ -54,6 +54,16 @@ namespace KM.SysControlAdmin.BL.Course___BL
         }
         #endregion
 
+        // Metodo para que admita int al hacer uso del metodo antecesor para automatizacion.
+        public async Task<Course> GetByIdAsync(int id)
+        {
+            // Crear una instancia de Membership y asignarle el ID
+            var course = new Course { Id = id };
+
+            // Llamar al método existente con el objeto Membership
+            return await CourseDAL.GetByIdAsync(course);
+        }
+
         #region METODO PARA BUSCAR
         // Metodo Para Buscar Registros Existentes
         public async Task<List<Course>> SearchAsync(Course course)
