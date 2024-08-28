@@ -117,12 +117,30 @@ namespace KM.SysControlAdmin.DAL.Course___DAL
         public static async Task<Course> GetByIdAsync(Course course)
         {
             var courseDB = new Course();
+
+            // Un bloque de conexión que mientras se permanezca en el bloque, la base de datos permanecerá abierta y al terminar se destruirá
             using (var dbContext = new ContextDB())
             {
-                courseDB = await dbContext.Course.FirstOrDefaultAsync(c => c.Id == course.Id);
+                courseDB = await dbContext.Course
+                    .Include(c => c.Schedule).Include(c => c.Trainer) // Incluir la propiedad de navegación de Profesión u Oficio
+                    .FirstOrDefaultAsync(m => m.Id == course.Id);
             }
-            return courseDB!;
+
+            return courseDB!; // Retornamos el registro encontrado
         }
+
+        // Normalmente el metodo deberia ser asi como el siguiente pero, por modificaciones en
+        // el proceso de servidores se a modificado pero se deja la forma normal para aprenderla.
+        // *********** Metodo Para Mostrar Un Registro En Base A Su Id *************
+        //public static async Task<Course> GetByIdAsync(Course course)
+        //{
+        //    var courseDB = new Course();
+        //    using (var dbContext = new ContextDB())
+        //    {
+        //        courseDB = await dbContext.Course.FirstOrDefaultAsync(c => c.Id == course.Id);
+        //    }
+        //    return courseDB!;
+        //}
         #endregion
 
         #region METODO PARA BUSCAR REGISTROS MEDIANTE EL USO DE FILTROS
