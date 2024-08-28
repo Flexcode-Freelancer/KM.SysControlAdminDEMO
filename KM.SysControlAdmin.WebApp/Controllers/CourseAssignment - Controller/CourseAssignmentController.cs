@@ -80,11 +80,13 @@ namespace KM.SysControlAdmin.WebApp.Controllers.CourseAssignment___Controller
             {
                 Code = course.Code,
                 Name = course.Name,
-                StarTime = course.StarTime.ToString("dd/MM/yyyy"),
+                StarTime = course.StartTime.ToString("dd/MM/yyyy"),
                 EndTime = course.EndTime.ToString("dd/MM/yyyy"),
                 MaxStudent = course.MaxStudent,
-                Schedule = course.Schedule?.Name,
-                Trainer = course.Trainer
+                Schedule = course.Schedule != null
+                ? $"{course.Schedule.StartTime:HH:mm} - {course.Schedule.EndTime:HH:mm}": null,
+                Trainer = course.Trainer != null
+                ? $"{course.Trainer.Name} {course.Trainer.LastName}": null
             };
             return Json(courseDetails);
         }
