@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\plugins\DataTables\js\" />
+    <Folder Include="wwwroot\plugins\Select2\js\" />
   </ItemGroup>
 
 </Project>
