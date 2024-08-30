@@ -86,7 +86,8 @@ namespace KM.SysControlAdmin.WebApp.Controllers.CourseAssignment___Controller
                 Schedule = course.Schedule != null
                 ? $"{course.Schedule.StartTime:HH:mm} - {course.Schedule.EndTime:HH:mm}": null,
                 Trainer = course.Trainer != null
-                ? $"{course.Trainer.Name} {course.Trainer.LastName}": null
+                ? $"{course.Trainer.Name} {course.Trainer.LastName}": null,
+                Status = course.Status
             };
             return Json(courseDetails);
         }
